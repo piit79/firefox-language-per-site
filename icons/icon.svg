@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="28" fill="#2b6cb0"/>
+  <ellipse cx="32" cy="32" rx="12" ry="28" fill="none" stroke="#fff" stroke-width="3"/>
+  <path d="M4 32h56M8 18h48M8 46h48" stroke="#fff" stroke-width="3" fill="none"/>
+  <rect x="34" y="34" width="28" height="22" rx="4" fill="#f6ad55"/>
+  <text x="48" y="51" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#1a202c">Aa</text>
+</svg>

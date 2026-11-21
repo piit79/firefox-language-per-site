@@ -1,0 +1,16 @@
+{
+  "name": "firefox-language-per-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Firefox extension: per-site language preferences",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "test:e2e": "node test/e2e/run.js",
+    "test:popup": "node test/e2e/popup.js",
+    "lint": "npx --yes web-ext@8 lint --source-dir . --ignore-files 'test/**' 'amo/**' package.json README.md",
+    "build": "npx --yes web-ext@8 build --source-dir . --ignore-files 'test/**' 'amo/**' package.json README.md --overwrite-dest",
+    "start": "npx --yes web-ext@8 run --source-dir .",
+    "release": "set -a && . ./.env && set +a && npx --yes web-ext@8 sign --channel=listed --source-dir . --ignore-files 'test/**' 'amo/**' package.json README.md",
+    "assets": "node amo/make-assets.js"
+  }
+}

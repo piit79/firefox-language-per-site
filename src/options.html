@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Language per Site – Settings</title>
+  <link rel="stylesheet" href="options.css">
+  <link rel="stylesheet" href="rules-ui.css">
+</head>
+<body class="options">
+  <main>
+    <h1>Language per Site</h1>
+
+    <section class="card">
+      <div class="rules-head">
+        <h2>Rules</h2>
+        <span class="hint" title="Precedence: exact host, then /regular expressions/ (first match from the top, so their order matters), then the longest *.domain, then *.">how rules match</span>
+      </div>
+      <dl class="legend">
+        <dt><code class="k-pat">example.com</code></dt><dd>only this exact host</dd>
+        <dt><code class="k-pat">*.example.com</code></dt><dd>the domain and all its subdomains</dd>
+        <dt><code class="k-regex">/^shop\d+\.example\.com$/</code></dt>
+        <dd>a <strong>regular expression</strong> in slashes, tested against the hostname. Case is ignored and it
+          isn't anchored (use <code>^…$</code>)</dd>
+        <dt><code class="k-pat">*</code></dt><dd>every other site</dd>
+        <dt><code>default</code></dt><dd>as languages: no override, use Firefox's own setting</dd>
+      </dl>
+      <p class="note precedence">
+        Precedence: exact host → regular expressions (first match from the top, so their order matters) →
+        longest <code>*.domain</code> → <code>*</code>. For the other rules, order is only for readability.
+        Edits are saved as you go. Drag <span class="handle-sample">⋮⋮</span> to reorder.
+      </p>
+      <div id="rulesBox"></div>
+    </section>
+
+    <section class="card">
+      <h2>Test a site</h2>
+      <input id="testUrl" type="text" placeholder="https://www.example.com/" spellcheck="false" aria-label="URL or host name to test">
+      <div id="testResult"></div>
+    </section>
+
+    <section class="card">
+      <h2>Options</h2>
+      <label class="check">
+        <input type="checkbox" id="intl">
+        <span>Also override the JavaScript default locale (<code>Intl.*</code>, <code>toLocaleString()</code>,
+          <code>localeCompare()</code>…)</span>
+      </label>
+      <p class="note">Firefox default languages: <code id="browserLangs">…</code></p>
+      <p class="note">Changes apply to newly loaded pages; reload open tabs to update them.</p>
+    </section>
+
+    <details class="card" id="textEditor">
+      <summary><h2>Edit as text</h2> <span class="note">for bulk changes and comments</span></summary>
+      <p class="note">One rule per line: <code>pattern = lang, lang, …</code> &nbsp;·&nbsp; <code>#</code> starts a comment.</p>
+      <textarea id="rules" spellcheck="false" rows="14" aria-label="Rules as text"></textarea>
+      <div id="messages" aria-live="polite"></div>
+      <div class="actions">
+        <button id="saveText" type="button">Save text</button>
+        <button id="revertText" type="button" class="secondary">Revert</button>
+      </div>
+    </details>
+  </main>
+
+  <footer class="statusbar">
+    <span id="status" aria-live="polite"></span>
+    <button type="button" id="undo" class="link-btn" hidden>Undo</button>
+  </footer>
+
+  <script src="rules.js"></script>
+  <script src="rules-ui.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

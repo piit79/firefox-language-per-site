@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="options.css">
+  <link rel="stylesheet" href="rules-ui.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>Language per Site</h1>
+    <button type="button" id="openOptions" class="icon-btn" title="Open settings" aria-label="Open settings">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.6 7.6 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.5 7.5 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.6 7.6 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.6 7.6 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>
+    </button>
+  </header>
+
+  <section id="site" class="site" hidden>
+    <div class="site-host" id="siteHost"></div>
+    <div class="site-match" id="siteMatch"></div>
+    <form id="form">
+      <div class="form-row">
+        <select id="pattern" aria-label="Site pattern"></select>
+      </div>
+      <div class="form-row">
+        <input type="text" id="langs" spellcheck="false" placeholder="en-GB, en, de  or  default" aria-label="Languages">
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </section>
+  <section id="noSite" class="site note" hidden>This page is not a website.</section>
+
+  <section class="rules">
+    <div class="rules-head">
+      <h2>Rules</h2>
+      <span class="hint" title="Precedence: exact host, then /regular expressions/ (first match from the top, so their order matters), then the longest *.domain, then *.">how rules match</span>
+    </div>
+    <div id="rulesBox"></div>
+    <p class="regex-note">
+      Put a pattern in slashes to use a <strong>regular expression</strong> on the hostname, e.g.
+      <code>/^shop\d+\.example\.com$/</code>. Case is ignored and it isn't anchored (use <code>^…$</code>).
+      Regex rules are tried top to bottom, after exact hosts and before <code>*.domain</code> rules.
+    </p>
+  </section>
+
+  <footer>
+    <span id="status" aria-live="polite"></span>
+    <button type="button" id="undo" class="link-btn" hidden>Undo</button>
+    <button type="button" id="reload" class="link-btn" hidden>Reload tab</button>
+  </footer>
+
+  <script src="rules.js"></script>
+  <script src="rules-ui.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

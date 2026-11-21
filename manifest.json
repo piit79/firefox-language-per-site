@@ -1,0 +1,48 @@
+{
+  "manifest_version": 2,
+  "name": "Language per Site",
+  "version": "1.0.0",
+  "description": "Override Firefox's preferred languages per site: Accept-Language header, navigator.language(s) in pages, frames and workers, and the JavaScript Intl default locale.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "language-per-site@zz9.cz",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
+  },
+  "permissions": [
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "background": {
+    "scripts": ["src/rules.js", "src/patch.js", "src/background.js"],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/patch.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "world": "MAIN"
+    }
+  ],
+  "options_ui": {
+    "page": "src/options.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_title": "Language per Site",
+    "default_popup": "src/popup.html",
+    "default_icon": "icons/icon.svg"
+  }
+}

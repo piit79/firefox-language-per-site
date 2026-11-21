@@ -1,0 +1,48 @@
+body {
+  width: 440px;
+  font-size: 13px;
+}
+header {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px 6px 14px;
+}
+h1 { font-size: 15px; margin: 0; flex: 1; }
+h2 { font-size: 13px; margin: 0; }
+
+.icon-btn {
+  background: transparent;
+  color: var(--muted);
+  padding: 4px;
+  border-radius: 6px;
+  line-height: 0;
+}
+.icon-btn:hover { background: var(--card); color: var(--fg); }
+.icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+.site { padding: 0 14px 10px; border-bottom: 1px solid var(--card-border); }
+.site-host { font-weight: 600; word-break: break-all; }
+.site-match { margin: 2px 0 8px; color: var(--muted); }
+.site-match .ok { color: var(--ok); }
+.form-row { display: flex; gap: 6px; margin-top: 6px; }
+.form-row select, .form-row input { flex: 1; min-width: 0; margin: 0; }
+select {
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: inherit;
+  font: 13px ui-monospace, monospace;
+}
+input[type="text"] { padding: 6px 8px; }
+
+.rules { padding: 10px 14px 4px; }
+#list { max-height: 300px; overflow-y: auto; }
+
+footer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 20px;
+  padding: 4px 14px 10px;
+}

@@ -1,0 +1,140 @@
+/* Rule list shared by the popup and the settings page. Base colours come from options.css. */
+:root {
+  --card: #f5f7fa;
+  --card-border: #dde2ea;
+  --chip: #e6eefa;
+  --chip-fg: #1e4e8c;
+  --regex: #f3e8fb;
+  --regex-fg: #6b2f91;
+  --active: #2b6cb0;
+  --pat-width: 150px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --card: #252a33;
+    --card-border: #353c49;
+    --chip: #1f3550;
+    --chip-fg: #a9cdf5;
+    --regex: #3a2648;
+    --regex-fg: #dcb8f5;
+    --active: #63b3ed;
+  }
+}
+
+.rules-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.hint { color: var(--muted); font-size: 12px; margin-left: auto; cursor: help; border-bottom: 1px dotted var(--muted); }
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+#list:empty::before {
+  content: "No rules yet.";
+  color: var(--muted);
+  padding: 6px 0;
+}
+.new-rows:not(:empty) { margin-top: 6px; }
+
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 4px 5px 6px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+}
+.rule.active { border-color: var(--active); box-shadow: inset 3px 0 0 var(--active); }
+.rule.overridden { opacity: 0.55; }
+.rule.dragging {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  opacity: 0.95;
+}
+.rule input {
+  margin: 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font: 13px/1.3 ui-monospace, monospace;
+}
+.rule .pat {
+  flex: 0 0 var(--pat-width);
+  width: var(--pat-width);
+  background: var(--chip);
+  color: var(--chip-fg);
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+.rule .pat.is-regex {
+  font-weight: 500;
+  background: var(--regex);
+  color: var(--regex-fg);
+}
+.rule .val {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: system-ui, sans-serif;
+}
+.rule input:hover { border-color: var(--card-border); }
+.rule input:focus { border-color: var(--accent); outline: none; background: var(--bg); }
+.rule input.bad { border-color: var(--err); }
+.rule .val.is-default { color: var(--muted); font-style: italic; }
+
+.badge {
+  flex: none;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--active);
+}
+.del, .handle {
+  flex: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 2px 4px;
+  border-radius: 4px;
+  line-height: 1;
+}
+.del { font-size: 16px; visibility: hidden; }
+.rule:hover .del, .rule:focus-within .del { visibility: visible; }
+.del:hover { color: var(--err); background: var(--bg); }
+.handle {
+  cursor: grab;
+  font-size: 16px;
+  touch-action: none;
+  letter-spacing: -2px;
+  padding-right: 6px;
+}
+.handle:hover, .handle:focus-visible { color: var(--fg); background: var(--bg); }
+.dragging .handle, body.is-dragging { cursor: grabbing; }
+body.is-dragging { user-select: none; }
+
+.invalid { color: var(--err); margin-top: 8px; font-size: 12px; }
+.add-btn {
+  margin: 8px 0 4px;
+  width: 100%;
+  background: transparent;
+  color: var(--accent);
+  border: 1px dashed var(--card-border);
+  padding: 6px;
+}
+.add-btn:hover { border-color: var(--accent); }
+
+.regex-note { color: var(--muted); font-size: 12px; line-height: 1.45; margin: 6px 0 0; }
+.regex-note code { font-size: 11.5px; color: var(--regex-fg); background: var(--regex); padding: 0 3px; border-radius: 3px; }
+
+.link-btn {
+  background: transparent;
+  color: var(--accent);
+  padding: 0;
+  font-size: 13px;
+}
+.link-btn:hover { text-decoration: underline; }
+#status { flex: 1; color: var(--muted); }
+#status.ok { color: var(--ok); }
+#status.err { color: var(--err); }
